@@ -10,7 +10,7 @@ export default function SearchForm({setNameTag, example = null}) {
   }
   
   return (
-    <form className="mt-10  gap-5 w-11/12 md:w-1/2 text-left">
+    <form className="mb-1/4  gap-5 w-11/12 md:w-1/2 text-left">
         <div className="w-full flex">
             <div className="w-3/5 md:w-3/4">
             <input type="text" id="search" placeholder="Buscar Nombre#Tag" className="rounded-l-lg shadow-lg bg-slate-900/75 text-white placeholder:text-gray-300 outline-none px-3 py-2 w-full" value={search} onChange={e => setSearch(e.target.value)} />
