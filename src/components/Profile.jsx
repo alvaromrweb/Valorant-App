@@ -11,7 +11,7 @@ export default function Profile({profile, profileMMRHistory, resetApp}) {
   return (
     <div className="flex justify-center">
         <BackButton resetApp={resetApp} />
-        <aside>
+        <aside className="my-5">
             <PlayerCard profile={profile} mmr={mmr} />
         </aside>
         <main>
