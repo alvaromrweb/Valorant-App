@@ -1,7 +1,7 @@
 import { useState } from "react"
 import Spinner from "./Spinner"
 
-export default function SearchForm({loading, setNameTag, example = null}) {
+export default function SearchForm({error, loading, setNameTag, example = null}) {
   const [search, setSearch] = useState('')
 
   const handleSearch = e => {
@@ -32,6 +32,9 @@ export default function SearchForm({loading, setNameTag, example = null}) {
                 </button>
             </div>
         </div>
+        {error && (
+          <div className="border border-red-700 bg-slate-900/75 text-white py-3 px-5 mt-5">{error}</div>
+        )}
     </form>
   )
 }

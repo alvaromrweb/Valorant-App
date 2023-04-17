@@ -20,6 +20,7 @@ const getAllProfileData = async nameTag => {
 function App() {
   const [nameTag, setNameTag] = useState({})
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
   const [profile, setProfile] = useState({})
   const [profileMMRHistory, setProfileMMRHistory] = useState([])
 
@@ -27,15 +28,22 @@ function App() {
     setNameTag({})
     setProfile({})
     setProfileMMRHistory([])
+    setError('')
   }
 
   useEffect(() => {
     if(Object.keys(nameTag).length > 0) {
+      if(!nameTag.name || !nameTag.tag) {
+        setError('Formato incorrecto de usuario')
+        return
+      }
       setLoading(true)
+      setError('')
       getAllProfileData(nameTag)
       .then(({account, MMRHistory}) => {
-        account.status === 200 && setProfile(account.data)
-        MMRHistory.status === 200 && setProfileMMRHistory(MMRHistory.data)
+        console.log(account)
+        account.status === 200 ? setProfile(account.data) : setError(account.error[0].message)
+        MMRHistory.status === 200 ? setProfileMMRHistory(MMRHistory.data) : setError(MMRHistory.error[0].message)
       })
       .catch(err => {
         console.log(err)
@@ -53,6 +61,7 @@ function App() {
           {Object.keys(profile).length === 0 ? (
             <SearchForm 
               loading={loading}
+              error={error}
               setNameTag={setNameTag} 
               example="Wizen#0000" 
             />
