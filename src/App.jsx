@@ -48,7 +48,7 @@ function App() {
 
   return (
     <div className="bg-slate-900 text-white">
-      <div className="bg-[url('/valorant-bg.jpg')] backdrop-opacity-60 backdrop-invert bg-white/30">
+      <div className="bg-[url('/valorant-bg.jpg')] bg-slate-900 bg-cover bg-center">
         <div className="container flex flex-col justify-center items-center mx-auto text-center min-h-screen pb-5">
           {Object.keys(profile).length === 0 ? (
             <SearchForm 
