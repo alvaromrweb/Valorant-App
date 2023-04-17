@@ -4,37 +4,43 @@ import SearchForm from './components/SearchForm';
 
 const VAPI = new HenrikDevValorantAPI();
 
+const getAllProfileData = async nameTag => {
+  try {
+    const [account, MMRHistory] = await Promise.all([
+      VAPI.getAccount(nameTag),
+      VAPI.getMMRHistory({...nameTag, region: 'eu'})
+    ])
+    return {account, MMRHistory}
+  } catch (error) {
+    return Promise.reject(error);
+  }
+}
+
 function App() {
-  const [search, setSearch] = useState({})
+  const [nameTag, setNameTag] = useState({name: '', tag: ''})
   const [profile, setProfile] = useState({})
   const [profileMMRHistory, setProfileMMRHistory] = useState([])
 
   useEffect(() => {
-    VAPI.getAccount({name: "eagle", tag: "7853"})
-    .then((data) => setProfile(data.data))
-    .catch(err => {
-      console.log(err);
-    })
-  }, [])
-
-  useEffect(() => {
-    if(Object.keys(profile).length > 0) {
-      VAPI.getMMRHistoryByPUUID({region: 'eu', puuid: profile.puuid})
-      .then((data) => setProfileMMRHistory(data.data))
+    if(nameTag.name && nameTag.tag) {
+      getAllProfileData(nameTag)
+      .then(({account, MMRHistory}) => {
+        account.status === 200 && setProfile(account.data)
+        MMRHistory.status === 200 && setProfileMMRHistory(MMRHistory.data)
+      })
       .catch(err => {
-        console.log(err);
+        console.log(err)
       })
     }
-  }, [profile])
-  
-  
+  }, [nameTag])
 
   return (
-    <main className="bg-[url('/valorant-bg.jpg')] text-white">
-      <div className="container mx-auto text-center min-h-screen pb-5">
-        <div className="flex flex-col justify-center items-center ">
-          <SearchForm />
+    <main className="bg-slate-900 text-white">
+      <div className="bg-[url('/valorant-bg.jpg')] backdrop-opacity-60 backdrop-invert bg-white/30">
+        <div className="container flex flex-col justify-center items-center mx-auto text-center min-h-screen pb-5">
+            <SearchForm setNameTag={setNameTag} example="Wizen#0000" />
         </div>
+
       </div>
     </main>
   )
