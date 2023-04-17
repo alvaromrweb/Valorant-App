@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import HenrikDevValorantAPI from 'unofficial-valorant-api';
 import SearchForm from './components/SearchForm';
+import Profile from './components/Profile';
 
 const VAPI = new HenrikDevValorantAPI();
 
@@ -17,12 +18,12 @@ const getAllProfileData = async nameTag => {
 }
 
 function App() {
-  const [nameTag, setNameTag] = useState({name: '', tag: ''})
+  const [nameTag, setNameTag] = useState({})
   const [profile, setProfile] = useState({})
   const [profileMMRHistory, setProfileMMRHistory] = useState([])
 
   useEffect(() => {
-    if(nameTag.name && nameTag.tag) {
+    if(Object.keys(nameTag).length > 0) {
       getAllProfileData(nameTag)
       .then(({account, MMRHistory}) => {
         account.status === 200 && setProfile(account.data)
@@ -35,14 +36,24 @@ function App() {
   }, [nameTag])
 
   return (
-    <main className="bg-slate-900 text-white">
+    <div className="bg-slate-900 text-white">
       <div className="bg-[url('/valorant-bg.jpg')] backdrop-opacity-60 backdrop-invert bg-white/30">
         <div className="container flex flex-col justify-center items-center mx-auto text-center min-h-screen pb-5">
-            <SearchForm setNameTag={setNameTag} example="Wizen#0000" />
+          {Object.keys(profile).length === 0 ? (
+            <SearchForm 
+              setNameTag={setNameTag} 
+              example="Wizen#0000" 
+            />
+          ) : 
+            <Profile 
+              profile={profile} 
+              profileMMRHistory={profileMMRHistory} 
+            />
+          }
         </div>
 
       </div>
-    </main>
+    </div>
   )
 }
 
