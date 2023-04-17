@@ -19,11 +19,13 @@ const getAllProfileData = async nameTag => {
 
 function App() {
   const [nameTag, setNameTag] = useState({})
+  const [loading, setLoading] = useState(false)
   const [profile, setProfile] = useState({})
   const [profileMMRHistory, setProfileMMRHistory] = useState([])
 
   useEffect(() => {
     if(Object.keys(nameTag).length > 0) {
+      setLoading(true)
       getAllProfileData(nameTag)
       .then(({account, MMRHistory}) => {
         account.status === 200 && setProfile(account.data)
@@ -31,6 +33,9 @@ function App() {
       })
       .catch(err => {
         console.log(err)
+      })
+      .finally(() => {
+        setLoading(false)
       })
     }
   }, [nameTag])
@@ -41,6 +46,7 @@ function App() {
         <div className="container flex flex-col justify-center items-center mx-auto text-center min-h-screen pb-5">
           {Object.keys(profile).length === 0 ? (
             <SearchForm 
+              loading={loading}
               setNameTag={setNameTag} 
               example="Wizen#0000" 
             />

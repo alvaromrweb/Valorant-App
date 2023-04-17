@@ -1,6 +1,7 @@
 import { useState } from "react"
+import Spinner from "./Spinner"
 
-export default function SearchForm({setNameTag, example = null}) {
+export default function SearchForm({loading, setNameTag, example = null}) {
   const [search, setSearch] = useState('')
 
   const handleSearch = e => {
@@ -24,7 +25,10 @@ export default function SearchForm({setNameTag, example = null}) {
                 type="submit" 
                 className="w-full text-xl bg-white hover:bg-[#ff4357] text-slate-900 hover:text-white drop-shadow-lg transition-colors py-2 px-10  font-bold rounded flex justify-center gap-2 disabled:opacity-75"
                 onClick={handleSearch}>
-                  Buscar
+                  {loading ? 
+                    <Spinner /> 
+                    : 'Buscar'
+                  }
                 </button>
             </div>
         </div>
