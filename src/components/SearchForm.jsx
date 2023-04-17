@@ -23,7 +23,7 @@ export default function SearchForm({loading, setNameTag, example = null}) {
             <div className="w-2/5 md:w-1/4">
                 <button 
                 type="submit" 
-                className="w-full text-xl bg-white hover:bg-[#ff4357] text-slate-900 hover:text-white drop-shadow-lg transition-colors py-2 px-10  font-bold rounded flex justify-center gap-2 disabled:opacity-75"
+                className="w-full text-xl bg-white hover:bg-[#ff4357] text-slate-900 hover:text-white drop-shadow-lg transition-colors py-2 px-10  font-bold rounded flex justify-center items-center gap-2 disabled:opacity-75 h-[40px]"
                 onClick={handleSearch}>
                   {loading ? 
                     <Spinner /> 
