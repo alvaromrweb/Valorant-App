@@ -12,7 +12,7 @@ export default function PlayerCard({profile, mmr}) {
               className="h-2.5  absolute top-0 opacity-50"
               style={{
                 width: `${Math.abs(mmr.pointsChangeLastGame)}%`, 
-                backgroundColor: mmr.pointsChangeLastGame > 0 ? '#0ff1b1' : '#ff4357',
+                backgroundColor: mmr.pointsChangeLastGame > 0 ? '#00684b' : '#ff4357',
                 left: `${mmr.pointsChangeLastGame > 0 ? mmr.currentPoints - Math.abs(mmr.pointsChangeLastGame) : mmr.currentPoints}%`
               }}
             ></div>
