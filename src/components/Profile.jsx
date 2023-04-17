@@ -3,7 +3,9 @@ import PlayerCard from "./PlayerCard"
 export default function Profile({profile, profileMMRHistory}) {
     const mmr = {
         rank: profileMMRHistory[0].currenttierpatched, 
-        image: profileMMRHistory[0].images.small
+        image: profileMMRHistory[0].images.small,
+        currentPoints: profileMMRHistory[0].ranking_in_tier,
+        pointsChangeLastGame: profileMMRHistory[0].mmr_change_to_last_game,
     }
   return (
     <div className="flex justify-center">
@@ -11,7 +13,7 @@ export default function Profile({profile, profileMMRHistory}) {
             <PlayerCard profile={profile} mmr={mmr} />
         </aside>
         <main>
-            
+
         </main>
     </div>
   )
