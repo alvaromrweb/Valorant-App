@@ -23,6 +23,12 @@ function App() {
   const [profile, setProfile] = useState({})
   const [profileMMRHistory, setProfileMMRHistory] = useState([])
 
+  const resetApp = () => {
+    setNameTag({})
+    setProfile({})
+    setProfileMMRHistory([])
+  }
+
   useEffect(() => {
     if(Object.keys(nameTag).length > 0) {
       setLoading(true)
@@ -53,7 +59,8 @@ function App() {
           ) : 
             <Profile 
               profile={profile} 
-              profileMMRHistory={profileMMRHistory} 
+              profileMMRHistory={profileMMRHistory}
+              resetApp={resetApp}
             />
           }
         </div>

@@ -1,6 +1,7 @@
 import PlayerCard from "./PlayerCard"
+import BackButton from "./BackButton"
 
-export default function Profile({profile, profileMMRHistory}) {
+export default function Profile({profile, profileMMRHistory, resetApp}) {
     const mmr = {
         rank: profileMMRHistory[0].currenttierpatched, 
         image: profileMMRHistory[0].images.small,
@@ -9,6 +10,7 @@ export default function Profile({profile, profileMMRHistory}) {
     }
   return (
     <div className="flex justify-center">
+        <BackButton resetApp={resetApp} />
         <aside>
             <PlayerCard profile={profile} mmr={mmr} />
         </aside>
