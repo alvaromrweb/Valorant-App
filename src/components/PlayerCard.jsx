@@ -20,7 +20,7 @@ export default function PlayerCard({profile, mmr}) {
                   mmr.currentPoints : 
                   Math.abs(mmr.pointsChangeLastGame)
                 }%`, 
-                backgroundColor: mmr.pointsChangeLastGame > 0 ? '#00684b' : '#ff4357',
+                backgroundColor: mmr.pointsChangeLastGame > 0 ? 'white' : '#ff4357',
                 left: `${
                   mmr.pointsChangeLastGame > 0 ? 
                     mmr.pointsChangeLastGame > mmr.currentPoints ? 
