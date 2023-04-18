@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import HenrikDevValorantAPI from 'unofficial-valorant-api';
 import SearchForm from './components/SearchForm';
 import Profile from './components/Profile';
+import { changeWebFavicon, changeWebTitle } from './helpers';
 
 const VAPI = new HenrikDevValorantAPI();
 
@@ -29,6 +30,8 @@ function App() {
     setProfile({})
     setProfileMMRHistory([])
     setError('')
+    changeWebTitle('Valorant GG EZ')
+    changeWebFavicon('/favicon.png')
   }
 
   useEffect(() => {
