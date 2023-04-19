@@ -14,9 +14,9 @@ export default function SearchForm({error, loading, setNameTag, example = null})
     <form className="mb-[25%]  gap-5 w-11/12 md:w-1/2 text-left">
         <div className="w-full flex">
             <div className="w-3/5 md:w-3/4">
-              <input type="text" id="search" placeholder="Buscar Nombre#Tag" className="rounded-l-lg drop-shadow-lg bg-slate-900/75 text-white placeholder:text-gray-300 outline-none px-3 py-2 w-full" value={search} onChange={e => setSearch(e.target.value)} />
+              <input type="text" id="search" placeholder="Search Player Name#Tagline" className="rounded-l-lg drop-shadow-lg bg-slate-900/75 text-white placeholder:text-gray-300 outline-none px-3 py-2 w-full" value={search} onChange={e => setSearch(e.target.value)} />
               {example && 
-                <small className="text-gray-300 text-left cursor-pointer" style={{textShadow:'#000 0px 0 10px'}} onClick={e => setSearch(example)}>Por ejemplo: &quot;{example}&quot;</small>
+                <small className="text-gray-300 text-left cursor-pointer" style={{textShadow:'#000 0px 0 10px'}} onClick={e => setSearch(example)}>Example: &quot;{example}&quot;</small>
               }
               
             </div>
@@ -27,7 +27,7 @@ export default function SearchForm({error, loading, setNameTag, example = null})
                 onClick={handleSearch}>
                   {loading ? 
                     <Spinner /> 
-                    : 'Buscar'
+                    : 'Search'
                   }
                 </button>
             </div>
