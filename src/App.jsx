@@ -8,11 +8,12 @@ const VAPI = new HenrikDevValorantAPI();
 
 const getAllProfileData = async nameTag => {
   try {
-    const [account, MMRHistory] = await Promise.all([
-      VAPI.getAccount(nameTag),
-      VAPI.getMMRHistory({...nameTag, region: 'eu'})
+    const account = await VAPI.getAccount(nameTag)
+    const [MMRHistory, matches] = await Promise.all([
+      VAPI.getMMRHistory({...nameTag, region: account.data.region}),
+      VAPI.getMatches({...nameTag, region: account.data.region})
     ])
-    return {account, MMRHistory}
+    return {account, MMRHistory, matches}
   } catch (error) {
     return Promise.reject(error);
   }
@@ -24,11 +25,13 @@ function App() {
   const [error, setError] = useState('')
   const [profile, setProfile] = useState({})
   const [profileMMRHistory, setProfileMMRHistory] = useState([])
+  const [profileMatches, setProfileMatches] = useState([])
 
   const resetApp = () => {
     setNameTag({})
     setProfile({})
     setProfileMMRHistory([])
+    setProfileMatches([])
     setError('')
     changeWebTitle('Valorant GG EZ')
     changeWebFavicon('/favicon.png')
@@ -37,19 +40,21 @@ function App() {
   useEffect(() => {
     if(Object.keys(nameTag).length > 0) {
       if(!nameTag.name || !nameTag.tag) {
-        setError('Formato incorrecto de usuario')
+        setError('Incorrect name#tag format')
         return
       }
       setLoading(true)
       setError('')
       getAllProfileData(nameTag)
-      .then(({account, MMRHistory}) => {
-        console.log(account)
+      .then(({account, MMRHistory, matches}) => {
+        console.log(account, MMRHistory, matches)
         account.status === 200 ? setProfile(account.data) : setError(account.error[0].message)
         MMRHistory.status === 200 ? setProfileMMRHistory(MMRHistory.data) : setError(MMRHistory.error[0].message)
+        matches.status === 200 ? setProfileMatches(matches.data) : setError(matches.error[0].message)
       })
       .catch(err => {
         console.log(err)
+        setError('Error trying to get account information')
       })
       .finally(() => {
         setLoading(false)
@@ -59,21 +64,23 @@ function App() {
 
   return (
     <div className="bg-slate-900 text-white">
-      <div className="bg-[url('/valorant-bg.jpg')] bg-slate-900 bg-cover bg-center">
+      <div className="bg-[url('/valorant-bg.jpg')] bg-slate-900 bg-fixed bg-cover bg-center">
         <div className="container flex flex-col justify-center items-center mx-auto text-center min-h-screen pb-5">
-          {Object.keys(profile).length === 0 ? (
-            <SearchForm 
-              loading={loading}
-              error={error}
-              setNameTag={setNameTag} 
-              example="Wizen#0000" 
-            />
-          ) : 
+          {Object.keys(profile).length > 0 && profileMatches.length > 0 && profileMMRHistory.length > 0 ? 
             <Profile 
               profile={profile} 
               profileMMRHistory={profileMMRHistory}
+              profileMatches={profileMatches}
               resetApp={resetApp}
             />
+            : 
+              <SearchForm 
+                loading={loading}
+                error={error}
+                setNameTag={setNameTag} 
+                example="Wizen#0000" 
+              />
+            
           }
         </div>
 
