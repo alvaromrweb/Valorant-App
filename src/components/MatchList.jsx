@@ -2,10 +2,9 @@ import PlayerPosition from "./PlayerPosition"
 import RankProgressBar from "./RankProgressBar"
 import { Tooltip } from "react-tooltip"
 
-export default function MatchList({profileMatches, MMRHistory, profileId}) {
+export default function MatchList({profileMatches, MMRHistory, profileId, isWizen}) {
     let matches = profileMatches
 
-    
     // Add variables to matches array that facilitate accesing the info
     matches = matches.map(match => {
         match.playerSelected = match.players.all_players.find(player => player.puuid === profileId) // Who is the player of the current profile
@@ -23,13 +22,18 @@ export default function MatchList({profileMatches, MMRHistory, profileId}) {
         
         return match
     })
-    console.log(matches)
 
   return (
     <div className="flex flex-col gap-5 bg-slate-900/90 py-5 px-4 rounded text-left">
         {matches.map(match => (
-            <article className={`w-full ${match.playerWon ? 'bg-[#64C2A7]/25 border-green-400' : 'bg-[#ff4357]/25 border-red-400'} border-l-8 rounded py-4 px-5 flex justify-between items-center gap-5`} key={match.metadata.matchid}>
-                <div>
+            <article 
+                className={`w-full border-l-8 rounded py-4 px-5 flex justify-between items-center gap-5 relative
+                ${match.playerWon ? 'bg-[#64C2A7]/25 border-green-400' : 'bg-[#ff4357]/25 border-red-400'} 
+                    ${isWizen && (match.playerWon ? "before:bg-[url('/wizencara.jpg')]" : "before:bg-[url('/wizencaragrito.jpg')]")} before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:opacity-30 before:bg-no-repeat
+                `} 
+                key={match.metadata.matchid}
+            >
+                <div className="z-10">
                     <p className={`font-bold text-xl ${match.playerWon ? 'text-green-400' : 'text-red-400'}`}>
                         {match.playerWon ? 'Victory' : 'Defeat'}
                     </p>
