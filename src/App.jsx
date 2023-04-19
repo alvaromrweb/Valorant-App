@@ -11,7 +11,7 @@ const getAllProfileData = async nameTag => {
     const account = await VAPI.getAccount(nameTag)
     const [MMRHistory, matches] = await Promise.all([
       VAPI.getMMRHistory({...nameTag, region: account.data.region}),
-      VAPI.getMatches({...nameTag, region: account.data.region})
+      VAPI.getMatches({...nameTag, region: account.data.region, size: 10})
     ])
     return {account, MMRHistory, matches}
   } catch (error) {
