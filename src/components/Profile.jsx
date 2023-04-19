@@ -1,14 +1,9 @@
 import PlayerCard from "./PlayerCard"
+import MatchList from "./MatchList"
 import BackButton from "./BackButton"
 import { changeWebFavicon, changeWebTitle } from "../helpers"
 
-export default function Profile({profile, profileMMRHistory, resetApp}) {
-    const mmr = {
-        rank: profileMMRHistory[0].currenttierpatched, 
-        image: profileMMRHistory[0].images.small,
-        currentPoints: profileMMRHistory[0].ranking_in_tier,
-        pointsChangeLastGame: profileMMRHistory[0].mmr_change_to_last_game,
-    }
+export default function Profile({profile, profileMMRHistory, profileMatches, resetApp}) {
 
     changeWebTitle(`Valorant GG EZ - ${profile.name}`)
     if(profile.name === 'Wizen') {
@@ -16,13 +11,13 @@ export default function Profile({profile, profileMMRHistory, resetApp}) {
     }
 
   return (
-    <div className="flex justify-center">
+    <div className="flex flex-col md:flex-row justify-center w-full mt-20 gap-5">
         <BackButton resetApp={resetApp} />
         <aside className="my-5">
-            <PlayerCard profile={profile} mmr={mmr} />
+            <PlayerCard profile={profile} mmr={profileMMRHistory[0]} />
         </aside>
-        <main>
-
+        <main className="w-full grow my-5">
+          <MatchList profileMatches={profileMatches} MMRHistory={profileMMRHistory} profileId={profile.puuid} />
         </main>
     </div>
   )
