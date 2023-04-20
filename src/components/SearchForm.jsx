@@ -22,11 +22,16 @@ export default function SearchForm({error, loading, setNameTag, example = null})
             </div>
             <div className="w-2/5 md:w-1/4">
                 <button 
-                type="submit" 
-                className="w-full text-xl bg-white hover:bg-[#ff4357] text-slate-900 hover:text-white drop-shadow-lg  rounded-r-lg transition-colors py-2 px-10  font-bold flex justify-center items-center gap-2 disabled:opacity-75 h-[40px]"
-                onClick={handleSearch}>
+                  type="submit" 
+                  className="w-full text-xl bg-white hover:bg-[#ff4357] text-slate-900 hover:text-white drop-shadow-lg  rounded-r-lg transition-colors py-2 px-5  font-bold flex justify-center items-center gap-2 disabled:opacity-75 h-[40px]"
+                  onClick={handleSearch}
+                  disabled={loading}
+                >
                   {loading ? 
-                    <Spinner /> 
+                    <>
+                      Searching...
+                      <Spinner /> 
+                    </>
                     : 'Search'
                   }
                 </button>
