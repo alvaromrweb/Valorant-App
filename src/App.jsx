@@ -47,7 +47,6 @@ function App() {
       setError('')
       getAllProfileData(nameTag)
       .then(({account, MMRHistory, matches}) => {
-        console.log(account, MMRHistory, matches)
         account.status === 200 ? setProfile(account.data) : setError(account.error[0].message)
         MMRHistory.status === 200 ? setProfileMMRHistory(MMRHistory.data) : setError(MMRHistory.error[0].message)
         matches.status === 200 ? setProfileMatches(matches.data) : setError(matches.error[0].message)
