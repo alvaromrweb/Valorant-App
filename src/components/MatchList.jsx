@@ -1,6 +1,6 @@
 import PlayerPosition from "./PlayerPosition"
 import RankProgressBar from "./RankProgressBar"
-import { Tooltip } from "react-tooltip"
+import RankImage from "./RankImage"
 
 export default function MatchList({profileMatches, MMRHistory, profileId, isWizen}) {
     let matches = profileMatches
@@ -58,14 +58,11 @@ export default function MatchList({profileMatches, MMRHistory, profileId, isWize
                     <p className="text-gray-400">{match.metadata.map}</p>
                     <p className="text-2xl font-bold">{match.teams.red.rounds_won} : {match.teams.blue.rounds_won}</p>
                 </div>
-                    <div className="w-32 flex flex-col gap-2">
+                <div className="w-32 flex flex-col gap-2 z-10">
                     {match.mmr ? (
                         <>
                             <div className="flex justify-center">
-                                <img className={`rank${match.metadata.matchid} w-10`} src={match.mmr.images.small} />
-                                <Tooltip anchorSelect={`.rank${match.metadata.matchid}`} place="top">
-                                    {match.mmr.currenttierpatched}
-                                </Tooltip>
+                                <RankImage mmr={match.mmr} size={'small'} />
                             </div>
                             <RankProgressBar mmr={match.mmr}>
                                 {match.mmr.ranking_in_tier} pts
@@ -74,7 +71,7 @@ export default function MatchList({profileMatches, MMRHistory, profileId, isWize
                     ) : (
                         <div className=""></div>
                     )}
-                    </div>
+                </div>
                 <div className="flex flex-col text-center">
                     <p className="text-gray-400">Score</p>
                     <span className="font-bold text-xl">{match.playerSelected.stats.score}</span>

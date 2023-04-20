@@ -1,6 +1,7 @@
 import 'react-tooltip/dist/react-tooltip.css'
 import { Tooltip } from 'react-tooltip'
 import RankProgressBar from './RankProgressBar'
+import RankImage from './RankImage'
 
 export default function PlayerCard({profile, mmr}) {
   return (
@@ -18,10 +19,11 @@ export default function PlayerCard({profile, mmr}) {
           </div>
         </div>
         <div className="absolute inset-x-0 bottom-[15%] flex flex-col justify-center items-center gap-2 text-xl">
-          <img className='rank' src={mmr.images.small} />
-          <Tooltip anchorSelect=".rank" place="bottom">
-            {mmr.currenttierpatched}
-          </Tooltip>
+          <RankImage 
+            mmr={mmr} 
+            uniqueSelector={'rankCard'}
+            placeTooltip={'bottom'} 
+          />
         </div>
     </div>
   )
