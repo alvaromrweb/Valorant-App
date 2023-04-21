@@ -5,8 +5,8 @@ import RankImage from './RankImage'
 
 export default function PlayerCard({profile, mmr}) {
   return (
-    <div className="relative">
-        <img src={profile.card.large} />
+    <div className="relative w-10/12 md:w-full mx-auto">
+        <img className='w-full' src={profile.card.large} />
         <div className='absolute inset-x-0 top-[-0.8rem]'>
           <span className="text-lg py-1 px-3 rounded-lg bg-slate-900/75" style={{textShadow:'#000 0px 0 10px'}}>Lvl {profile.account_level}</span>
         </div>
