@@ -18,7 +18,7 @@ export default function PlayerPosition({playerPosition}) {
     }
       
   return (
-    <span className={`rounded-full py-1 px-5 ${bgColor}`}>
+    <span className={`rounded-full py-0.5 px-3 md:py-1 md:px-5 ${bgColor}`}>
         {playerPosition === 1 ? 'MVP' : getNumberWithOrdinal(playerPosition)}
     </span>
   )
