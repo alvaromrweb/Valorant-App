@@ -11,20 +11,20 @@ export default function PlayerCard({profile, mmr}) {
           <img className='w-full' src={profile.card.large} alt={`Card background of ${profile.name}`} />
         </picture>
         
-        <div className='absolute left-4 top-4 md:inset-x-0 md:top-[-0.8rem] '>
+        <div className='absolute inset-x-0 md:inset-x-0 top-[-0.8rem] '>
           <span className="text-sm md:text-lg py-1 px-3 rounded-lg bg-slate-900/75">Lvl {profile.account_level}</span>
         </div>
-        <h2 className="absolute left-4 bottom-3 md:inset-x-0 md:bottom-[35%] text-2xl md:text-4xl font-bold " style={{textShadow:'#000 0px 0 10px'}}>
+        <h2 className="absolute inset-x-0 bottom-3 md:inset-x-0 md:bottom-[35%] text-2xl md:text-4xl font-bold " style={{textShadow:'#000 0px 0 10px'}}>
           {profile.name}
         </h2>
         <div className="absolute right-4 inset-y-0 md:inset-y-auto md:right-0 md:inset-x-0 md:bottom-[12%] flex justify-center items-center">
-          <div className='w-10/12 flex flex-col-reverse md:flex-col items-center md:items-stretch'>
-            <div className='hidden md:block'>
+          <div className='w-10/12 flex flex-col-reverse md:flex-col items-center md:items-stretch gap-1 md:gap-0'>
+            <div className='hidden md:block text-xs md:text-base w-20 md:w-auto'>
               <RankProgressBar mmr={mmr}>
                 {mmr.ranking_in_tier} pts
               </RankProgressBar>
             </div>
-            <div className='flex justify-center md:mt-2   md:w-auto'>
+            <div className='flex justify-center md:mt-2 '>
               <RankImage 
                 mmr={mmr} 
                 uniqueSelector={'rankCard'}
