@@ -11,7 +11,7 @@ export default function RankImage({mmr, uniqueSelector = mmr.match_id, placeTool
 
   return (
     <div className="relative">
-        <img className={`rank${uniqueSelector} ${size === 'small' && 'w-10'}`} src={mmr.images.small} />
+        <img className={`rank${uniqueSelector} ${size === 'small' && 'w-10'}`} src={mmr.images.small} alt={`Image of rank ${mmr.currenttierpatched}`} />
         {rankDivisionChanged && 
             <div className="absolute bottom-0 right-0">
                 <IconRankChange change={rankDivisionChange} size={size} />

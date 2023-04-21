@@ -42,7 +42,7 @@ export default function MatchList({profileMatches, MMRHistory, profileId, isWize
                 </div>
                 
                 <div className="z-10 basis-1/4 md:basis-auto">
-                    <img className="w-12 md:w-[4.5rem] max-w-fit" src={match.playerSelected.assets.agent.small} />
+                    <img className="w-12 md:w-[4.5rem] max-w-fit" src={match.playerSelected.assets.agent.small} alt={`Image of agent ${match.playerSelected.character}`} />
                 </div>
                 <div className="flex flex-col basis-1/4 md:basis-auto text-center z-10">
                     <div className="text-gray-500 md:text-xl whitespace-nowrap">

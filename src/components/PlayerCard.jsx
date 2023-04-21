@@ -1,12 +1,11 @@
 import 'react-tooltip/dist/react-tooltip.css'
-import { Tooltip } from 'react-tooltip'
 import RankProgressBar from './RankProgressBar'
 import RankImage from './RankImage'
 
 export default function PlayerCard({profile, mmr}) {
   return (
     <div className="relative w-10/12 md:w-full mx-auto">
-        <img className='w-full' src={profile.card.large} />
+        <img className='w-full' src={profile.card.large} alt={`Card background of ${profile.name}`} />
         <div className='absolute inset-x-0 top-[-0.8rem]'>
           <span className="text-lg py-1 px-3 rounded-lg bg-slate-900/75" style={{textShadow:'#000 0px 0 10px'}}>Lvl {profile.account_level}</span>
         </div>
