@@ -6,8 +6,8 @@ export default function PlayerCard({profile, mmr}) {
   return (
     <div className="relative w-full mx-auto">
         <picture>
-          <source media="(max-width: 768px)" srcset={profile.card.wide} />
-          <source media="(min-width: 768px)" srcset={profile.card.large} />
+          <source media="(max-width: 768px)" srcSet={profile.card.wide} />
+          <source media="(min-width: 768px)" srcSet={profile.card.large} />
           <img className='w-full' src={profile.card.large} alt={`Card background of ${profile.name}`} />
         </picture>
         
