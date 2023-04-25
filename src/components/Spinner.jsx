@@ -4,7 +4,7 @@ export default function Spinner() {
     <>
         <div className='spinner'></div>
 
-        <style jsx>{`
+        <style jsx="true">{`
         .spinner {
         border: 4px solid rgba(0, 0, 0, .2);
         border-left-color: #0f172a;
