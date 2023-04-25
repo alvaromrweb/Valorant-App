@@ -4,11 +4,11 @@ import RankImage from './RankImage'
 
 export default function PlayerCard({profile, mmr}) {
   return (
-    <div className="relative w-full mx-auto">
+    <div className="relative w-full mx-auto drop-shadow-lg">
         <picture>
           <source media="(max-width: 768px)" srcSet={profile.card.wide} />
           <source media="(min-width: 768px)" srcSet={profile.card.large} />
-          <img className='w-full' src={profile.card.large} alt={`Card background of ${profile.name}`} />
+          <img className='w-full border border-white/25 rounded-md' src={profile.card.large} alt={`Card background of ${profile.name}`} />
         </picture>
         
         <div className='absolute inset-x-0 md:inset-x-0 top-[-0.8rem] '>
