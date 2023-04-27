@@ -31,7 +31,7 @@ function App() {
                 loading={loading}
                 error={error}
                 setNameTag={setNameTag} 
-                example="Wizen#0000" 
+                example="Vizzxe#0000" 
               />
           }
         </div>
