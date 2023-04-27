@@ -4,7 +4,7 @@ import RankImage from './RankImage'
 
 export default function PlayerCard({profile, mmr}) {
   return (
-    <div className="relative w-full mx-auto drop-shadow-lg">
+    <div className="relative w-full mx-auto drop-shadow-lg" data-testid="playerCard">
         <picture>
           <source media="(max-width: 768px)" srcSet={profile.card.wide} />
           <source media="(min-width: 768px)" srcSet={profile.card.large} />
