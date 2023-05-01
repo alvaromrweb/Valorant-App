@@ -36,9 +36,29 @@ export const formatMatches = ({matches, MMRHistory, profileId}) => {
         match.playerSelected.stats.kda = ((match.playerSelected.stats.kills * (match.playerSelected.stats.assists / 3)) / match.playerSelected.stats.deaths).toFixed(2) // Add KDA variable
         match.playerPosition = match.players.all_players.findIndex(player => player.puuid === profileId) + 1 // Player position in match
         match.mmr = MMRHistory.find(mmrItem => mmrItem.match_id === match.metadata.matchid) // Link mmrHistory match object with profileMatch
-        match.playerSelected.damagePerCredits = Math.round(match.playerSelected.damage_made / (match.playerSelected.economy.spent.overall / 1000)) // Add damage per 1000 credits data calculation
+        match.playerSelected.damagePerCredits = Math.round(match.playerSelected.damage_made / (match.playerSelected.economy.spent.overall / 1000)) // Add damage per 1000 credits data calculationç
+        match.isDeathmatch = match.metadata.mode === 'Deathmatch'
+        match.isDraw = match.teams.red.rounds_won === match.teams.blue.rounds_won
         
         return match
     })
     return matchesFormated
+}
+
+export const getStylesForMatch = (match, isWizen) => {
+    let classNames = ''
+    classNames += isWizen && " before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:opacity-30 before:bg-no-repeat before:bg-contain md:before-bg-auto "
+    if(match.isDeathmatch) {
+        classNames += ' bg-slate-300/25 border-slate-100 '
+        classNames += isWizen && " before:bg-[url('/wizencara-deathmatch.jpg')] "
+    } else {
+        if(match.isDraw) {
+            classNames += ' bg-slate-500/25 border-slate-400 '
+            classNames += isWizen && " before:bg-[url('/wizencara-rara.jpg')] "
+        } else {
+            classNames += match.playerWon ? ' bg-[#64C2A7]/25 border-green-400 ' : ' bg-[#ff4357]/25 border-red-400 '
+            classNames += isWizen && (match.playerWon ? " before:bg-[url('/wizencara.jpg')] " : " before:bg-[url('/wizencaragrito.jpg')] ")
+        }
+    }
+    return classNames;
 }

@@ -1,19 +1,22 @@
 import PlayerPosition from "./PlayerPosition"
 import RankProgressBar from "./RankProgressBar"
 import RankImage from "./RankImage"
+import { getStylesForMatch } from "../helpers"
 
 export default function Match({match, isWizen}) {
+
     return  (
         <article 
-                className={`w-full border-l-8 rounded py-4 px-5 flex flex-wrap justify-between items-center gap-3 md:gap-5 relative
-                ${match.playerWon ? 'bg-[#64C2A7]/25 border-green-400' : 'bg-[#ff4357]/25 border-red-400'} 
-                    ${isWizen && (match.playerWon ? "before:bg-[url('/wizencara.jpg')]" : "before:bg-[url('/wizencaragrito.jpg')]")} before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:opacity-30 before:bg-no-repeat before:bg-contain md:before-bg-auto
-                `} 
+                className={`w-full border-l-8 rounded py-4 px-5 flex flex-wrap justify-between items-center gap-3 md:gap-5 relative ${getStylesForMatch(match, isWizen)}`} 
             >
                 <div className="z-10 basis-full md:basis-auto flex flex-row md:flex-col gap-4 md:gap-0 items-center md:items-start justify-between md:justify-normal">
-                    <p className={`font-bold md:text-xl ${match.playerWon ? 'text-green-400' : 'text-red-400'}`}>
-                        {match.playerWon ? 'Victory' : 'Defeat'}
-                    </p>
+                    {!match.isDeathmatch && (
+                        <p className={`font-bold md:text-xl ${match.isDraw ? 'text-slate-400' : match.playerWon ? 'text-green-400' : 'text-red-400'}`}>
+                            {match.isDraw ? 'Draw' : (
+                                match.playerWon ? 'Victory' : 'Defeat'
+                            )}
+                        </p>
+                    )}
                     <p className="text-gray-300 text-xs md:text-base">{match.metadata.mode}</p>
                     <p className="text-gray-300 text-xs md:text-base">{match.matchHour} - {match.matchDate}</p>
                 </div>
@@ -33,7 +36,9 @@ export default function Match({match, isWizen}) {
                 </div>
                 <div className="flex flex-col 2xl:px-5 text-center z-10 basis-1/4 md:basis-auto">
                     <p className="text-gray-400">{match.metadata.map}</p>
-                    <p className="md:text-2xl font-bold">{match.teams.red.rounds_won} : {match.teams.blue.rounds_won}</p>
+                    {!match.isDeathmatch && (
+                        <p className="md:text-2xl font-bold">{match.teams.red.rounds_won} : {match.teams.blue.rounds_won}</p>
+                    )}
                 </div>
                 <div className="w-32 hidden md:flex flex-col gap-2 z-10">
                     {match.mmr ? (
