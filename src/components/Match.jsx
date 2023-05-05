@@ -4,13 +4,21 @@ import RankImage from "./RankImage"
 import { getStylesForMatch } from "../helpers"
 import { useContext } from "react"
 import { ProfileContext } from "../context/profile"
+import MatchDetails from "./MatchDetails"
 
 export default function Match({match}) {
     const {isWizen} = useContext(ProfileContext)
 
+    const toggleDetails = () => {
+        const matchDetails = document.getElementById(`match-details-${match.metadata.matchid}`)
+        // matchDetails.classList.toggle("hidden");
+    }
+
     return  (
+        <>
         <article 
-                className={`w-full min-h-[7.2rem] border-l-8 rounded py-4 px-5 flex flex-wrap justify-between items-center gap-3 md:gap-5 relative ${getStylesForMatch(match, isWizen)}`} 
+                className={`w-full min-h-[7.2rem] border-l-8 rounded py-4 px-5 flex flex-wrap justify-between items-center gap-3 md:gap-5 relative cursor-pointer ${getStylesForMatch(match, isWizen)}`} 
+                onClick={() => toggleDetails()}
             >
                 <div className="z-10 basis-full md:basis-auto flex flex-row md:flex-col gap-4 md:gap-0 items-center md:items-start justify-between md:justify-normal">
                     {!match.isDeathmatch && (
@@ -35,7 +43,7 @@ export default function Match({match}) {
                     </div>
                 </div>
                 <div className="text-center z-10 basis-1/4 md:basis-auto">
-                    <PlayerPosition playerPosition={match.playerPosition} />
+                    <PlayerPosition playerPosition={match.playerSelected.matchPosition} />
                 </div>
                 <div className="flex flex-col 2xl:px-5 text-center z-10 basis-1/4 md:basis-auto">
                     <p className="text-gray-400">{match.metadata.map}</p>
@@ -70,5 +78,8 @@ export default function Match({match}) {
                     <span className="font-bold md:text-xl">{match.playerSelected.damagePerCredits > 0 ? match.playerSelected.damagePerCredits : '0'} </span>
                 </div>
             </article>
+            
+            <MatchDetails match={match} />
+        </>
     )
 }
