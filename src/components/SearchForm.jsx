@@ -18,7 +18,7 @@ export default function SearchForm({example = null}) {
             <div className="w-9/12 md:w-3/4">
               <input type="text" id="search" placeholder="Search Player Name#Tagline" className="rounded-l-lg drop-shadow-lg bg-slate-900/75 text-white placeholder:text-gray-300 outline-none px-3 py-2 w-full" value={search} onChange={e => setSearch(e.target.value)} />
               {example && 
-                <small className="text-gray-300 text-left cursor-pointer" style={{textShadow:'#000 0px 0 10px'}} onClick={e => setSearch(example)}>Example: &quot;{example}&quot;</small>
+                <small className="text-gray-300 text-left cursor-pointer hover:text-gray-100 transition-colors" style={{textShadow:'#000 0px 0 10px'}} onClick={e => setSearch(example)}>Example: &quot;{example}&quot;</small>
               }
               
             </div>
