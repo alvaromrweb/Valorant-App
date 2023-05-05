@@ -10,7 +10,7 @@ export default function Match({match}) {
 
     return  (
         <article 
-                className={`w-full border-l-8 rounded py-4 px-5 flex flex-wrap justify-between items-center gap-3 md:gap-5 relative ${getStylesForMatch(match, isWizen)}`} 
+                className={`w-full min-h-[7.2rem] border-l-8 rounded py-4 px-5 flex flex-wrap justify-between items-center gap-3 md:gap-5 relative ${getStylesForMatch(match, isWizen)}`} 
             >
                 <div className="z-10 basis-full md:basis-auto flex flex-row md:flex-col gap-4 md:gap-0 items-center md:items-start justify-between md:justify-normal">
                     {!match.isDeathmatch && (
