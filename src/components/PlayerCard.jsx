@@ -1,8 +1,14 @@
 import 'react-tooltip/dist/react-tooltip.css'
 import RankProgressBar from './RankProgressBar'
 import RankImage from './RankImage'
+import { useContext } from 'react'
+import { ProfileContext } from '../context/profile'
 
-export default function PlayerCard({profile, mmr}) {
+export default function PlayerCard() {
+
+  const {profile, profileMMRHistory} = useContext(ProfileContext)
+  const mmr = profileMMRHistory[0]
+
   return (
     <div className="relative w-full mx-auto drop-shadow-lg" data-testid="playerCard">
         <picture>

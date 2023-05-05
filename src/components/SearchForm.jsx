@@ -1,8 +1,10 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import Spinner from "./Spinner"
+import { ProfileContext } from "../context/profile"
 
-export default function SearchForm({error, loading, setNameTag, example = null}) {
+export default function SearchForm({example = null}) {
   const [search, setSearch] = useState('')
+  const {setNameTag, loading, error} = useContext(ProfileContext)
 
   const handleSearch = e => {
     e.preventDefault()

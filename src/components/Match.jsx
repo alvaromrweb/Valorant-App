@@ -2,8 +2,11 @@ import PlayerPosition from "./PlayerPosition"
 import RankProgressBar from "./RankProgressBar"
 import RankImage from "./RankImage"
 import { getStylesForMatch } from "../helpers"
+import { useContext } from "react"
+import { ProfileContext } from "../context/profile"
 
-export default function Match({match, isWizen}) {
+export default function Match({match}) {
+    const {isWizen} = useContext(ProfileContext)
 
     return  (
         <article 

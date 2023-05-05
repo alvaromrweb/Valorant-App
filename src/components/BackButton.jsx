@@ -1,5 +1,8 @@
+import { useContext } from "react";
+import { ProfileContext } from "../context/profile"
 
-export default function BackButton({resetApp}) {
+export default function BackButton() {
+  const {resetApp} = useContext(ProfileContext)
     const handleBack = e => {
         e.preventDefault();
         resetApp()

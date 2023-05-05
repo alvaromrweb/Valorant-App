@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react"
-import { getAllProfileData } from "../services/profile"
-import { changeWebFavicon, changeWebTitle } from "../helpers"
+import { createContext, useState, useEffect } from "react";
+import { getAllProfileData } from "../services/profile";
+import { changeWebFavicon, changeWebTitle } from "../helpers";
 
-export function useProfile () {
+export const ProfileContext = createContext()
 
+export function ProfileProvider ({ children }) {
     const [nameTag, setNameTag] = useState({})
     const [profile, setProfile] = useState({})
     const [profileMMRHistory, setProfileMMRHistory] = useState([])
@@ -57,5 +58,19 @@ export function useProfile () {
         }
       }, [nameTag])
 
-      return {profile, profileMMRHistory, profileMatches, isWizen, loading, error, setNameTag, resetProfile, resetApp}
+    return (
+        <ProfileContext.Provider value={{
+            profile, 
+            profileMMRHistory, 
+            profileMatches, 
+            isWizen,
+            loading, 
+            error, 
+            setNameTag, 
+            resetProfile, 
+            resetApp
+        }}>
+            {children}
+        </ProfileContext.Provider>
+    )
 }
