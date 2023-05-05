@@ -25,20 +25,26 @@ export const hasRankDivisionChanged = mmr => {
 
 export const formatMatches = ({matches, MMRHistory, profileId}) => {
     const matchesFormated = matches.map(match => {
-        match.playerSelected = match.players.all_players.find(player => player.puuid === profileId) // Who is the player of the current profile
-        match.players.all_players.sort((a, b) => b.stats.score - a.stats.score)
         match.winnerTeam = match.teams.red.has_won ? 'Red' : 'Blue' // Which team won
+        match.players.all_players.sort((a, b) => b.stats.score - a.stats.score) // Sort players by score
+        match.players.all_players = match.players.all_players.map((player, index) => {
+            player.isCurrentProfile = player.puuid === profileId // If this player is the current profile
+            player.hasWon = player.team === match.winnerTeam // If the player won
+            player.matchPosition = index + 1 // Add position
+            player.stats.kda = ((player.stats.kills * (player.stats.assists / 3) / player.stats.deaths)).toFixed(2) // Add KDA
+            player.damagePerCredits = Math.round(player.damage_made / (player.economy.spent.overall / 1000)) // Add damage per 1000 credits data calculation
+            return player
+        })
+        match.playerSelected = match.players.all_players.find(player => player.puuid === profileId) // Who is the player of the current profile
         match.playerWon = match.playerSelected.team === match.winnerTeam // If the player won
         let matchDate = new Date(match.metadata.game_start_patched)
         matchDate.setHours(matchDate.getHours() + 2); // Change timezone to Madrid
         match.matchHour = matchDate.toLocaleString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true }) // Format time
         match.matchDate = matchDate.toLocaleString('es-ES', {day: 'numeric', month: 'numeric', year: 'numeric' }) // Format date
-        match.playerSelected.stats.kda = ((match.playerSelected.stats.kills * (match.playerSelected.stats.assists / 3)) / match.playerSelected.stats.deaths).toFixed(2) // Add KDA variable
-        match.playerPosition = match.players.all_players.findIndex(player => player.puuid === profileId) + 1 // Player position in match
         match.mmr = MMRHistory.find(mmrItem => mmrItem.match_id === match.metadata.matchid) // Link mmrHistory match object with profileMatch
-        match.playerSelected.damagePerCredits = Math.round(match.playerSelected.damage_made / (match.playerSelected.economy.spent.overall / 1000)) // Add damage per 1000 credits data calculationç
         match.isDeathmatch = match.metadata.mode === 'Deathmatch'
         match.isDraw = match.teams.red.rounds_won === match.teams.blue.rounds_won
+        
         
         return match
     })
