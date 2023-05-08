@@ -34,7 +34,7 @@ export default function Player({player}) {
             {player.damage_made} 
         </div>
         <div className="basis-1/12 text-center">
-            {player.headshotPercent}%
+            {player.headshotPercent || 0}%
         </div>
     </div>
   )

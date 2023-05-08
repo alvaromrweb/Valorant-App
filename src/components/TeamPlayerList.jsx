@@ -1,12 +1,18 @@
 import Player from "./Player"
 
-export default function TeamPlayerList({match, team}) {
+export default function TeamPlayerList({match, team = null}) {
   return (
-    <div className={`flex-1 flex flex-col gap-1 rounded ${match.teams[team].has_won ? 'bg-[#64C2A7]/25' : 'bg-[#ff4357]/25'}`}>
+    <div 
+        className={`flex-1 flex flex-col rounded 
+        ${match.isDeathmatch ? 'bg-slate-300/25' : match.teams[team].has_won ? 'bg-[#64C2A7]/25' : 'bg-[#ff4357]/25'}
+        `}
+    >
         <div className={`flex items-center text-center text-slate-300 bg-slate-800 text-sm px-3 py-2`}>
             <div className={`basis-1/12 font-bold ${match.isDraw ? 'text-slate-400' : match.teams[team].has_won ? 'text-[#64C2A7]' : 'text-[#ff4357]'}`}>
-                {match.isDraw ? 'Draw' : (
-                    match.teams[team].has_won ? 'Victory' : 'Defeat'
+                {!match.isDeathmatch && (
+                    match.isDraw ? 'Draw' : (
+                        match.teams[team].has_won ? 'Victory' : 'Defeat'
+                    )
                 )}
             </div>
             <div className="basis-3/12">
@@ -33,12 +39,21 @@ export default function TeamPlayerList({match, team}) {
         </div>
 
         {match.players.all_players.map(player => {
-            {return player.team.toUpperCase() === team.toUpperCase() && (
+            if(match.isDeathmatch) {
+                return (
                 <Player
                     key={player.puuid}
                     player={player}
                 />
-            )}
+                )
+            } else if(player.team.toUpperCase() === team.toUpperCase()) {
+                return (
+                    <Player
+                        key={player.puuid}
+                        player={player}
+                    />
+                )
+            }
         })}
     </div>
   )
