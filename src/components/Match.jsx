@@ -11,7 +11,7 @@ export default function Match({match}) {
 
     const toggleDetails = () => {
         const matchDetails = document.getElementById(`match-details-${match.metadata.matchid}`)
-        // matchDetails.classList.toggle("hidden");
+        matchDetails.classList.toggle("hidden");
     }
 
     return  (
