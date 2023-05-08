@@ -33,6 +33,7 @@ export const formatMatches = ({matches, MMRHistory, profileId}) => {
             player.matchPosition = index + 1 // Add position
             player.stats.kda = ((player.stats.kills * (player.stats.assists / 3) / player.stats.deaths)).toFixed(2) // Add KDA
             player.damagePerCredits = Math.round(player.damage_made / (player.economy.spent.overall / 1000)) // Add damage per 1000 credits data calculation
+            player.headshotPercent = Math.round((player.stats.headshots / (player.stats.headshots + player.stats.bodyshots + player.stats.legshots)) * 100)
             return player
         })
         match.playerSelected = match.players.all_players.find(player => player.puuid === profileId) // Who is the player of the current profile
