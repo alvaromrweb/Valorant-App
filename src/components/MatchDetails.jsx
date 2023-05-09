@@ -3,7 +3,7 @@ import TeamPlayerList from "./TeamPlayerList"
 export default function MatchDetails({ match }) {
   return (
     <div id={`match-details-${match.metadata.matchid}`} className="w-full hidden">
-        <div className="flex flex-col md:flex-row w-full gap-4">
+        <div className="flex flex-col xl:flex-row w-full gap-4">
             {match.isDeathmatch ? (
                 <TeamPlayerList match={match} />
             ) : (
