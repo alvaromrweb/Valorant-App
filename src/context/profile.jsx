@@ -44,7 +44,7 @@ export function ProfileProvider ({ children }) {
 
             changeWebTitle(`Valorant GG EZ - ${account.data.name}`)
             // Wizen specific functionality
-            const isWizenSync = account.data.puuid === "451817ec-bb49-5552-9456-9d5ec3064fae"
+            const isWizenSync = account.data.puuid === import.meta.env.VITE_WIZEN_PUUID
             setIsWizen(isWizenSync)
             isWizenSync && changeWebFavicon('/wizencara.jpg')
           })
