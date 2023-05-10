@@ -56,16 +56,35 @@ export const getStylesForMatch = (match, isWizen) => {
     let classNames = ''
     classNames += isWizen && " before:content-[''] before:absolute before:top-0 before:left-0 before:w-full before:h-full before:opacity-30 before:bg-no-repeat before:bg-contain md:before-bg-auto "
     if(match.isDeathmatch) {
-        classNames += ' bg-slate-300/25 border-slate-100 '
+        classNames += ' bg-slate-300/25 hover:bg-slate-300/50 border-slate-100 '
         classNames += isWizen && " before:bg-[url('/wizencara-deathmatch.jpg')] "
     } else {
         if(match.isDraw) {
-            classNames += ' bg-slate-500/25 border-slate-400 '
+            classNames += ' bg-slate-500/25 hover:bg-slate-500/50 border-slate-400 '
             classNames += isWizen && " before:bg-[url('/wizencara-rara.jpg')] "
         } else {
-            classNames += match.playerWon ? ' bg-[#64C2A7]/25 border-green-400 ' : ' bg-[#ff4357]/25 border-red-400 '
+            classNames += match.playerWon ? ' bg-[#64C2A7]/25 hover:bg-[#64C2A7]/40 border-green-400 ' : ' bg-[#ff4357]/25 hover:bg-[#ff4357]/40 border-red-400 '
             classNames += isWizen && (match.playerWon ? " before:bg-[url('/wizencara.jpg')] " : " before:bg-[url('/wizencaragrito.jpg')] ")
         }
     }
     return classNames;
+}
+
+export const getRankImageByTier = tier => {
+    return `https://media.valorant-api.com/competitivetiers/03621f52-342b-cf4e-4f86-9350a49c6d04/${tier}/smallicon.png`
+}
+
+export const getElapsedTime = (start, end) => {
+    const difference = end - start
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+    let elapsedTime = ''
+    if(days > 0) elapsedTime = `${days} days`
+    else if(hours > 0) elapsedTime = `${hours} hours`
+    else if(minutes > 0) elapsedTime = `${minutes} min`
+    else if(seconds > 0) elapsedTime = `${seconds} seconds`
+    elapsedTime += ' ago'
+    return elapsedTime
 }
