@@ -1,9 +1,9 @@
 import { Tooltip } from "react-tooltip"
-import { hasRankDivisionChanged } from "../helpers"
+import { hasRankDivisionChanged, getRankImageByTier } from "../helpers"
 import IconRankChange from "./IconRankChange"
 
 export default function RankImage({mmr, uniqueSelector = mmr.match_id, placeTooltip = 'top', size = 'full'}) {
-    const rankImage = `https://media.valorant-api.com/competitivetiers/03621f52-342b-cf4e-4f86-9350a49c6d04/${mmr.currenttier}/smallicon.png`
+    const rankImage = getRankImageByTier(mmr.currenttier)
     let rankDivisionChange
     const rankDivisionChanged = hasRankDivisionChanged(mmr)
     if(rankDivisionChanged) {
