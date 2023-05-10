@@ -1,13 +1,15 @@
 import { useState, useContext } from "react"
 import Spinner from "./Spinner"
 import { ProfileContext } from "../context/profile"
+import RecentSearches from "./RecentSearches"
 
 export default function SearchForm({example = null}) {
   const [search, setSearch] = useState('')
+  const [showRecentSearches, setShowRecentSearches] = useState(false)
   const {setNameTag, loading, error} = useContext(ProfileContext)
 
-  const handleSearch = e => {
-    e.preventDefault()
+  const handleSearch = (e = null) => {
+    e && e.preventDefault()
     const searchArr = search.split('#')
     setNameTag({name: searchArr[0], tag: searchArr[1]})
   }
@@ -16,7 +18,27 @@ export default function SearchForm({example = null}) {
     <form className="mt-[15%] md:mt-0 md:mb-[25%]  gap-5 w-11/12 md:w-1/2 text-left">
         <div className="w-full flex">
             <div className="w-9/12 md:w-3/4">
-              <input type="text" id="search" placeholder="Search Player Name#Tagline" className="rounded-l-lg drop-shadow-lg bg-slate-900/75 text-white placeholder:text-gray-300 outline-none px-3 py-2 w-full" value={search} onChange={e => setSearch(e.target.value)} />
+              <div className="relative" >
+                <input 
+                  type="text" 
+                  id="search" 
+                  autoComplete="off"
+                  placeholder="Search Player Name#Tagline" 
+                  className="rounded-l-lg drop-shadow-lg bg-slate-900/75 text-white placeholder:text-gray-300 outline-none px-3 py-2 w-full" 
+                  value={search} 
+                  onChange={e => setSearch(e.target.value)} 
+                  onFocus={e => setShowRecentSearches(true)}
+                  onBlur={e => setShowRecentSearches(false)}
+                />
+                {showRecentSearches && (
+                  <RecentSearches 
+                    search={search} 
+                    setSearch={setSearch} 
+                    handleSearch={handleSearch}
+                    setShowRecentSearches={setShowRecentSearches}
+                  />
+                )}
+              </div>
               {example && 
                 <small className="text-gray-300 text-left cursor-pointer hover:text-gray-100 transition-colors" style={{textShadow:'#000 0px 0 10px'}} onClick={e => setSearch(example)}>Example: &quot;{example}&quot;</small>
               }

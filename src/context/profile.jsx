@@ -9,6 +9,11 @@ export function ProfileProvider ({ children }) {
     const [profile, setProfile] = useState({})
     const [profileMMRHistory, setProfileMMRHistory] = useState([])
     const [profileMatches, setProfileMatches] = useState([])
+    const [recentSearches, setRecentSearches] = useState(() => {
+      // Get from localstorage if exists
+      const searchesFromStrage = window.localStorage.getItem('recentSearches')
+      return searchesFromStrage ? JSON.parse(searchesFromStrage) : []
+    })
     const [isWizen, setIsWizen] = useState(false)
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState('')
@@ -42,7 +47,31 @@ export function ProfileProvider ({ children }) {
             MMRHistory.status === 200 ? setProfileMMRHistory(MMRHistory.data) : setError(MMRHistory.error[0].message)
             matches.status === 200 ? setProfileMatches(matches.data) : setError(matches.error[0].message)
 
-            changeWebTitle(`Valorant GG EZ - ${account.data.name}`)
+            // Save search in recent searches
+            const recentSearch = {
+              puuid: account.data.puuid,
+              name: account.data.name,
+              tag: account.data.tag,
+              currenttier: MMRHistory.data[0].currenttier,
+              dateSearch: Date.now()
+            }
+
+            if((recentSearches.filter(search => search.puuid === account.data.puuid)).length > 0) {
+              // Update search if already exists
+              let newRecentSearches = recentSearches.map(search => {
+                return search.puuid === recentSearch.puuid ? recentSearch : search
+              })
+              newRecentSearches = newRecentSearches.sort((a, b) => b.dateSearch - a.dateSearch)
+              setRecentSearches(newRecentSearches)
+              window.localStorage.setItem('recentSearches', JSON.stringify(newRecentSearches))
+            } else {
+              const newRecentSearches = [recentSearch].concat(recentSearches)
+              setRecentSearches(newRecentSearches)
+              window.localStorage.setItem('recentSearches', JSON.stringify(newRecentSearches))
+
+            }
+
+            changeWebTitle(`${account.data.name}#${account.data.tag}`)
             // Wizen specific functionality
             const isWizenSync = account.data.puuid === import.meta.env.VITE_WIZEN_PUUID
             setIsWizen(isWizenSync)
@@ -63,6 +92,7 @@ export function ProfileProvider ({ children }) {
             profile, 
             profileMMRHistory, 
             profileMatches, 
+            recentSearches,
             isWizen,
             loading, 
             error, 
