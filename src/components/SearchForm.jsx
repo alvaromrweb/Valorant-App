@@ -8,9 +8,9 @@ export default function SearchForm({example = null}) {
   const [showRecentSearches, setShowRecentSearches] = useState(false)
   const {setNameTag, loading, error} = useContext(ProfileContext)
 
-  const handleSearch = (e = null) => {
+  const handleSearch = (e = null, newSearch = null) => {
     e && e.preventDefault()
-    const searchArr = search.split('#')
+    const searchArr = newSearch ? newSearch.split('#') : search.split('#')
     setNameTag({name: searchArr[0], tag: searchArr[1]})
   }
   
