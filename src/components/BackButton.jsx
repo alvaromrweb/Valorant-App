@@ -1,11 +1,14 @@
 import { useContext } from "react";
 import { ProfileContext } from "../context/profile"
+import { useNavigate } from "react-router-dom";
 
 export default function BackButton() {
   const {resetApp} = useContext(ProfileContext)
+  const navigate = useNavigate()
     const handleBack = e => {
         e.preventDefault();
         resetApp()
+        navigate('/')
     }
   return (
     <div className="absolute left-0 top-0">

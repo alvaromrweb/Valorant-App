@@ -2,16 +2,27 @@ import { useState, useContext } from "react"
 import Spinner from "./Spinner"
 import { ProfileContext } from "../context/profile"
 import RecentSearches from "./RecentSearches"
+import { isValidNameTag } from "../helpers"
+import { useNavigate } from "react-router-dom"
 
-export default function SearchForm({example = null}) {
+export default function SearchForm() {
   const [search, setSearch] = useState('')
   const [showRecentSearches, setShowRecentSearches] = useState(false)
-  const {setNameTag, loading, error} = useContext(ProfileContext)
+  const {setNameTag, loading, error, setError} = useContext(ProfileContext)
+  const example = import.meta.env.VITE_PLAYER_EXAMPLE
+  const navigate = useNavigate()
 
   const handleSearch = (e = null, newSearch = null) => {
     e && e.preventDefault()
-    const searchArr = newSearch ? newSearch.split('#') : search.split('#')
-    setNameTag({name: searchArr[0], tag: searchArr[1]})
+    const finalSearch = newSearch || search
+    // const searchArr = newSearch ? newSearch.split('#') : search.split('#')
+    if(isValidNameTag(finalSearch)) {
+      // setNameTag(finalSearch)
+      navigate(`/player/${encodeURIComponent(finalSearch)}`)
+    } else {
+      setError('Invalid name#tag')
+    }
+    
   }
   
   return (

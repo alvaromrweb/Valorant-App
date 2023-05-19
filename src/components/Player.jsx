@@ -1,14 +1,17 @@
 import PlayerPosition from "./PlayerPosition"
 import RankImage from "./RankImage"
+import { Link } from "react-router-dom"
 
 export default function Player({player}) {
   return (
-    <div className={`flex items-center text-sm px-3 py-2 gap-2 ${player.isCurrentProfile && 'bg-white/25'}`}>
+    <Link to={`/player/${encodeURIComponent(`${player.name}#${player.tag}`)}`} className={`flex items-center text-sm px-3 py-2 gap-2 ${player.isCurrentProfile && 'bg-white/[15%]'} hover:bg-white/25`}>
         <div className="basis-1/12 md:basis-1/12">
             <img className={`w-8 max-w-fit`} src={player.assets.agent.small} alt={`Image of agent ${player.character}`} />
         </div>
         <div className="basis-5/12 md:basis-3/12 text-xs md:text-sm break-all">
-            <p>{player.name}<span className="text-gray-400">#{player.tag}</span></p>
+            
+                {player.name}<span className="text-gray-400">#{player.tag}</span>
+            
         </div>
         <div className="basis-3/12 md:basis-2/12 text-center">
             <div className="text-gray-500 whitespace-nowrap">
@@ -36,6 +39,6 @@ export default function Player({player}) {
         <div className="basis-1/12 hidden md:block text-center">
             {player.headshotPercent || 0}%
         </div>
-    </div>
+    </Link>
   )
 }
