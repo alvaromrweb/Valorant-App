@@ -3,7 +3,7 @@ import { ProfileContext } from "../context/profile"
 import { getRankImageByTier, getElapsedTime } from "../helpers"
 
 export default function RecentSearches ({search, setSearch, handleSearch, setShowRecentSearches}) {
-    const {recentSearches} = useContext(ProfileContext)
+    const {recentSearches, deleteRecentSearch} = useContext(ProfileContext)
     const handleClick = async recentSearch => {
         setSearch(`${recentSearch.name}#${recentSearch.tag}`)
         setShowRecentSearches(false)
@@ -12,21 +12,33 @@ export default function RecentSearches ({search, setSearch, handleSearch, setSho
   return (
     <div id="recent-searches" className="flex flex-col bg-slate-800 text-white  absolute top-full w-full rounded-lg max-h-[25rem] overflow-y-auto">
         {recentSearches.map(recentSearch => {
-            if(((`${recentSearch.name}#${recentSearch.tag}`).toUpperCase()).startsWith(search.toUpperCase())) {
+            // Filter recent searches from current typed search
+            if(((`${recentSearch.name}#${recentSearch.tag}`).toUpperCase()).startsWith(search.toUpperCase())) { 
                 return (
                     <div 
                         key={recentSearch.puuid} 
-                        className="flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer hover:bg-slate-600 transition-colors"
-                        onMouseDown={() => handleClick(recentSearch)}
+                        className="flex items-center gap-2 px-3 py-2 rounded-lg  hover:bg-slate-600 transition-colors"
                     >
-                        <div>
-                            <img className="w-10" src={getRankImageByTier(recentSearch.currenttier)} alt={`Image of rank ${recentSearch.currenttier}`} />
+                        <div 
+                            className="flex items-center cursor-pointer gap-2 flex-1"
+                            onMouseDown={() => handleClick(recentSearch)}
+                        >
+                            <div>
+                                <img className="w-10" src={getRankImageByTier(recentSearch.currenttier)} alt={`Image of rank ${recentSearch.currenttier}`} />
+                            </div>
+                            <div>
+                                {recentSearch.name}<span className="text-slate-400">#{recentSearch.tag}</span>
+                            </div>
+                            <div className="hidden md:block text-slate-500 text-xs">
+                                {getElapsedTime(recentSearch.dateSearch, Date.now())}
+                            </div>
+
                         </div>
-                        <div>
-                            {recentSearch.name}<span className="text-slate-400">#{recentSearch.tag}</span>
-                        </div>
-                        <div className="text-slate-500 text-xs">
-                            {getElapsedTime(recentSearch.dateSearch, Date.now())}
+                        <div 
+                            className="text-slate-400 text-lg ml-auto hover:bg-slate-300/50 hover:text-white px-3 py-1 rounded-lg flex items-center cursor-pointer"
+                            onMouseDown={() => deleteRecentSearch(recentSearch)}
+                        >
+                            ✕
                         </div>
                     </div>
                 )

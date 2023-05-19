@@ -31,7 +31,15 @@ export function ProfileProvider ({ children }) {
         changeWebTitle('Valorant GG EZ')
         changeWebFavicon('/favicon.png')
       }
+    const deleteRecentSearch = searchToDelete => {
+      const newRecentSearches = recentSearches.filter(recentSearch => recentSearch.puuid !== searchToDelete.puuid)
+      setRecentSearches(newRecentSearches)
+    }
     
+    // useEffect to store on localstorage recentSearches when they are updated
+    useEffect(() => {
+      window.localStorage.setItem('recentSearches', JSON.stringify(recentSearches))
+    }, [recentSearches])
 
     useEffect(() => {
         if(nameTag) {
@@ -64,12 +72,9 @@ export function ProfileProvider ({ children }) {
                 })
                 newRecentSearches = newRecentSearches.sort((a, b) => b.dateSearch - a.dateSearch)
                 setRecentSearches(newRecentSearches)
-                window.localStorage.setItem('recentSearches', JSON.stringify(newRecentSearches))
               } else {
                 const newRecentSearches = [recentSearch].concat(recentSearches)
                 setRecentSearches(newRecentSearches)
-                window.localStorage.setItem('recentSearches', JSON.stringify(newRecentSearches))
-  
               }
   
               changeWebTitle(`${account.data.name}#${account.data.tag}`)
@@ -102,7 +107,8 @@ export function ProfileProvider ({ children }) {
             setError,
             setNameTag, 
             resetProfile, 
-            resetApp
+            resetApp,
+            deleteRecentSearch
         }}>
             {children}
         </ProfileContext.Provider>
