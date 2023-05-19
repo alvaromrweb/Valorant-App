@@ -88,3 +88,10 @@ export const getElapsedTime = (start, end) => {
     elapsedTime += ' ago'
     return elapsedTime
 }
+
+export const isValidNameTag = nametag => {
+    if(!nametag) return false
+    const regExp = new RegExp("([A-Za-z0-9 ]|[^\x00-\x7F]){3,}#([A-Za-z0-9 ]|[^\x00-\x7F]){3,5}")
+    const found = nametag.match(regExp)
+    return !found || found[0] !== nametag ? false : true
+}
