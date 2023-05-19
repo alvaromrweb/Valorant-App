@@ -3,10 +3,12 @@ const VAPI = new HenrikDevValorantAPI();
 
 export const getAllProfileData = async nameTag => {
     try {
-      const account = await VAPI.getAccount(nameTag)
+      const nametagArr = nameTag.split('#')
+      const nameTagObj = {name: nametagArr[0], tag: nametagArr[1]}
+      const account = await VAPI.getAccount(nameTagObj)
       const [MMRHistory, matches] = await Promise.all([
-        VAPI.getMMRHistory({...nameTag, region: account.data.region}),
-        VAPI.getMatches({...nameTag, region: account.data.region, size: 10})
+        VAPI.getMMRHistory({...nameTagObj, region: account.data.region}),
+        VAPI.getMatches({...nameTagObj, region: account.data.region, size: 10})
       ])
       return {account, MMRHistory, matches}
     } catch (error) {
