@@ -9,8 +9,15 @@ export default function RecentSearches ({search, setSearch, handleSearch, setSho
         setShowRecentSearches(false)
         handleSearch(null, `${recentSearch.name}#${recentSearch.tag}`)
     }
+
+    const handleDelete = async recentSearch => {
+        // Settimeout so that the blur event has time to get the clicked element here before it is deleted
+        setTimeout(() => {
+            deleteRecentSearch(recentSearch)
+        }, 1); 
+    }
   return (
-    <div id="recent-searches" className="flex flex-col bg-slate-800 text-white  absolute top-full w-full rounded-lg max-h-[25rem] overflow-y-auto">
+    <div id="recent-searches"  className="flex flex-col bg-slate-800 text-white  absolute top-full w-full rounded-lg max-h-[25rem] overflow-y-auto">
         {recentSearches.map(recentSearch => {
             // Filter recent searches from current typed search
             if(((`${recentSearch.name}#${recentSearch.tag}`).toUpperCase()).startsWith(search.toUpperCase())) { 
@@ -22,6 +29,7 @@ export default function RecentSearches ({search, setSearch, handleSearch, setSho
                         <div 
                             className="flex items-center cursor-pointer gap-2 flex-1"
                             onMouseDown={() => handleClick(recentSearch)}
+                            tabIndex="0"
                         >
                             <div>
                                 <img className="w-10" src={getRankImageByTier(recentSearch.currenttier)} alt={`Image of rank ${recentSearch.currenttier}`} />
@@ -35,8 +43,9 @@ export default function RecentSearches ({search, setSearch, handleSearch, setSho
 
                         </div>
                         <div 
-                            className="text-slate-400 text-lg ml-auto hover:bg-slate-300/50 hover:text-white px-3 py-1 rounded-lg flex items-center cursor-pointer"
-                            onMouseDown={() => deleteRecentSearch(recentSearch)}
+                            className="text-slate-400 text-lg ml-auto hover:bg-slate-300/50 hover:text-white px-3 py-1 rounded-lg flex items-center cursor-pointer delete-recent-search"
+                            tabIndex="0"
+                            onMouseDown={() => handleDelete(recentSearch)}
                         >
                             ✕
                         </div>

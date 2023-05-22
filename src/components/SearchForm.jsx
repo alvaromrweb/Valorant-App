@@ -22,7 +22,12 @@ export default function SearchForm() {
     } else {
       setError('Invalid name#tag')
     }
-    
+  }
+
+  const handleBlur = e => {
+    if(!e.relatedTarget?.classList?.contains('delete-recent-search')) {
+      setShowRecentSearches(false)
+    }
   }
   
   return (
@@ -39,7 +44,7 @@ export default function SearchForm() {
                   value={search} 
                   onChange={e => setSearch(e.target.value)} 
                   onFocus={e => setShowRecentSearches(true)}
-                  onBlur={e => setShowRecentSearches(false)}
+                  onBlur={handleBlur}
                 />
                 {showRecentSearches && (
                   <RecentSearches 
