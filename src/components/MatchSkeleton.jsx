@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function MatchSkeleton() {
   return (
-    <div className='w-full min-h-[7.2rem] border border-l-8 border-slate-700 rounded py-4 px-5 flex flex-wrap justify-between items-center gap-3 md:gap-5 relative'>
+    <div className='w-full min-h-[7.2rem] border border-l-8 border-slate-700 bg-slate-300/5 rounded py-4 px-5 flex flex-wrap justify-between items-center gap-3 md:gap-5 relative'>
         <div className="z-10 basis-full md:basis-auto 2xl:basis-40 flex flex-row md:flex-col gap-4 md:gap-0 items-center md:items-start justify-between md:justify-normal">
             <div className="w-20 h-7 rounded-full bg-slate-700 mt-2"></div>
             <div className="w-24 h-3.5 rounded-full bg-slate-700 mt-2"></div>
