@@ -24,13 +24,10 @@ export function ProfileProvider ({ children }) {
         setProfileMMRHistory([])
         setProfileMatches([])
         setError('')
-      }
-
-    const resetApp = () => {
-        resetProfile()
         changeWebTitle('Valorant GG EZ')
         changeWebFavicon('/favicon.png')
       }
+
     const deleteRecentSearch = searchToDelete => {
       const newRecentSearches = recentSearches.filter(recentSearch => recentSearch.puuid !== searchToDelete.puuid)
       setRecentSearches(newRecentSearches)
@@ -107,7 +104,6 @@ export function ProfileProvider ({ children }) {
             setError,
             setNameTag, 
             resetProfile, 
-            resetApp,
             deleteRecentSearch
         }}>
             {children}
