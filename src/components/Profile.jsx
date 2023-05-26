@@ -1,6 +1,5 @@
 import PlayerCard from "./PlayerCard"
 import MatchList from "./MatchList"
-import BackButton from "./BackButton"
 import { useContext, useEffect } from "react"
 import { ProfileContext } from "../context/profile"
 import { useParams } from "react-router-dom"
@@ -18,12 +17,11 @@ export default function Profile() {
   return (
     <>
       <div className="flex flex-col md:flex-row justify-center w-full mt-16 md:mt-20 gap-5">
-          <BackButton />
           {loading ? 
           <ProfileSkeleton /> : (
 
             error ? (
-              <div className="border-2 border-red-700 bg-slate-900/90 text-4xl text-white py-6 px-10 mt-5">
+              <div className="border-2 border-red-700 bg-slate-900/90 text-4xl font-bold text-white py-6 px-10 mt-5">
                 {error}
               </div>
             ) : (Object.keys(profile).length > 0 && profileMatches.length > 0 && profileMMRHistory.length > 0) && 
