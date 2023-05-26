@@ -25,7 +25,7 @@ export const hasRankDivisionChanged = mmr => {
 
 export const formatMatches = ({matches, MMRHistory, profileId}) => {
     const matchesFormated = matches.map(match => {
-        match.winnerTeam = match.teams.red.has_won ? 'Red' : 'Blue' // Which team won
+        match.winnerTeam = match.teams?.red?.has_won ? 'Red' : 'Blue' // Which team won
         match.players.all_players.sort((a, b) => b.stats.score - a.stats.score) // Sort players by score
         match.players.all_players = match.players.all_players.map((player, index) => {
             player.isCurrentProfile = player.puuid === profileId // If this player is the current profile
