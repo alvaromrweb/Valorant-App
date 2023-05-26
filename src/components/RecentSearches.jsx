@@ -17,7 +17,7 @@ export default function RecentSearches ({search, setSearch, handleSearch, setSho
         }, 1); 
     }
   return (
-    <div id="recent-searches"  className="flex flex-col bg-slate-800 text-white  absolute top-full w-full rounded-lg max-h-[25rem] overflow-y-auto">
+    <div id="recent-searches"  className="flex flex-col bg-slate-800 text-white w-full rounded-lg max-h-[25rem] overflow-y-auto ">
         {recentSearches.map(recentSearch => {
             // Filter recent searches from current typed search
             if(((`${recentSearch.name}#${recentSearch.tag}`).toUpperCase()).startsWith(search.toUpperCase())) { 
