@@ -18,9 +18,11 @@ export default function RankImage({mmr, uniqueSelector = mmr.match_id, placeTool
                 <IconRankChange change={rankDivisionChange} size={size} />
             </div>
         }
-        <Tooltip anchorSelect={`.rank${uniqueSelector}`} place={placeTooltip}>
-            {mmr.currenttierpatched}
-        </Tooltip>
+        {mmr.currenttierpatched && (
+            <Tooltip anchorSelect={`.rank${uniqueSelector}`} place={placeTooltip}>
+                {mmr.currenttierpatched}
+            </Tooltip>
+        )}
     </div>
   )
 }
