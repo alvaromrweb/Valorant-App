@@ -23,7 +23,7 @@ export default function Header() {
         <header className='w-full bg-slate-900 px-5 py-2 drop-shadow-md relative z-20'>
             <div className="container flex flex-wrap mx-auto gap-4 md:gap-0 justify-between md:justify-normal">
                 <div className="basis-2/12 flex items-center">
-                    <NavLink to="/">
+                    <NavLink to="/" onClick={() => resetProfile() }>
                         <h2 className='text-4xl font-bold'>
                             GG<span className="text-redV">.</span>EZ
                         </h2>
