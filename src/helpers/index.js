@@ -63,7 +63,7 @@ export const getStylesForMatch = (match, isWizen) => {
             classNames += ' bg-slate-500/25 hover:bg-slate-500/50 border-slate-400 '
             classNames += isWizen && " before:bg-[url('/wizencara-rara.jpg')] "
         } else {
-            classNames += match.playerWon ? ' bg-[#64C2A7]/25 hover:bg-[#64C2A7]/40 border-green-400 ' : ' bg-[#ff4357]/25 hover:bg-[#ff4357]/40 border-red-400 '
+            classNames += match.playerWon ? ' bg-greenV/25 hover:bg-greenV/40 border-green-400 ' : ' bg-redV/25 hover:bg-redV/40 border-red-400 '
             classNames += isWizen && (match.playerWon ? " before:bg-[url('/wizencara.jpg')] " : " before:bg-[url('/wizencaragrito.jpg')] ")
         }
     }
@@ -71,7 +71,15 @@ export const getStylesForMatch = (match, isWizen) => {
 }
 
 export const getRankImageByTier = tier => {
-    return `https://media.valorant-api.com/competitivetiers/03621f52-342b-cf4e-4f86-9350a49c6d04/${tier}/smallicon.png`
+    return `${import.meta.env.VITE_STATIC_MEDIA_API}/competitivetiers/03621f52-342b-cf4e-4f86-9350a49c6d04/${tier}/smallicon.png`
+}
+
+export const getPlayerCardImgById = (cardId, size = 'small') => {
+    return `${import.meta.env.VITE_STATIC_MEDIA_API}/playercards/${cardId}/${size}art.png`
+}
+
+export const getMapImgByName = map => {
+    return `${import.meta.env.VITE_MAPS_IMG_API}/Maps/${map}.png`
 }
 
 export const getElapsedTime = (start, end) => {
