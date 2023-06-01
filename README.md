@@ -6,5 +6,7 @@ TODO LIST:
 - Make a router so you can access a player profile by a url instead of having to search always :white_check_mark:
 - Store recent searches in localstorage and show them when focusing the search input :white_check_mark:
 - Add header with search input :white_check_mark:
+- Add leaderboard :white_check_mark:
+- Make leaderboard able to change region and paginate or infinite scroll
 - Make infinite scroll load of matches
 - Store data fetch in database, and only fetch when the data is not in the database or needs refresh
