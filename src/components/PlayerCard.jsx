@@ -20,7 +20,7 @@ export default function PlayerCard() {
         <div className='absolute inset-x-0 md:inset-x-0 top-[-0.8rem] '>
           <span className="text-sm md:text-lg py-1 px-3 rounded-lg bg-slate-900/75">Lvl {profile.account_level}</span>
         </div>
-        <h2 className="absolute inset-x-0 bottom-3 md:inset-x-0 md:bottom-[35%] text-2xl md:text-4xl font-bold " style={{textShadow:'#000 0px 0 10px'}}>
+        <h2 className="absolute inset-x-0 bottom-3 md:inset-x-0 md:bottom-[35%] text-2xl md:text-4xl font-bold break-all" style={{textShadow:'#000 0px 0 10px'}}>
           {profile.name}
         </h2>
         <div className="absolute right-4 inset-y-0 md:inset-y-auto md:right-0 md:inset-x-0 md:bottom-[12%] flex justify-center items-center">
