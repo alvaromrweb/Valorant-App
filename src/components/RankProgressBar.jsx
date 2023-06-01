@@ -8,7 +8,7 @@ export default function RankProgressBar({children, mmr}) {
     <div className="text-center">
         {ranking_in_tier <= 100 &&
             <div className="w-full bg-gray-200  h-2.5 dark:bg-gray-700 relative ">
-                <div className="bg-[#64C2A7] h-2.5 " style={{width: `${ranking_in_tier}%`}}></div>
+                <div className="bg-greenV h-2.5 " style={{width: `${ranking_in_tier}%`}}></div>
                 <div 
                     className={`h-2.5 absolute top-0 opacity-50 pointsChange${match_id}`}
                     style={{
@@ -17,7 +17,7 @@ export default function RankProgressBar({children, mmr}) {
                         ranking_in_tier : 
                         Math.abs(mmr_change_to_last_game)
                     }%`, 
-                    backgroundColor: mmr_change_to_last_game > 0 ? 'white' : '#ff4357',
+                    backgroundColor: mmr_change_to_last_game > 0 ? 'white' : 'var(--color-red-valorant)',
                     left: `${
                         mmr_change_to_last_game > 0 ? 
                         mmr_change_to_last_game > ranking_in_tier ? 

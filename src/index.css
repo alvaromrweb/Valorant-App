@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    :root {
+      --color-redV: 255 67 87;
+      --color-greenV: 100 194 167;
+      --color-red-valorant: rgb(255, 67, 87);
+      --color-green-valorant: rgb(100, 194, 167);
+    }
+  }

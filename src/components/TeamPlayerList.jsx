@@ -4,11 +4,11 @@ export default function TeamPlayerList({match, team = null}) {
   return (
     <div 
         className={`flex-1 flex flex-col rounded 
-        ${match.isDeathmatch ? 'bg-slate-300/25' : match.teams[team].has_won ? 'bg-[#64C2A7]/25' : 'bg-[#ff4357]/25'}
+        ${match.isDeathmatch ? 'bg-slate-300/25' : match.teams[team].has_won ? 'bg-greenV/25' : 'bg-redV/25'}
         `}
     >
         <div className={`flex gap-2 items-center text-center text-slate-300 bg-slate-800 text-sm px-3 py-2`}>
-            <div className={`basis-2/12 md:basis-1/12 font-bold ${match.isDraw ? 'text-slate-400' : match.teams[team].has_won ? 'text-[#64C2A7]' : 'text-[#ff4357]'}`}>
+            <div className={`basis-2/12 md:basis-1/12 font-bold ${match.isDraw ? 'text-slate-400' : match.teams[team].has_won ? 'text-greenV' : 'text-redV'}`}>
                 {!match.isDeathmatch && (
                     match.isDraw ? 'Draw' : (
                         match.teams[team].has_won ? 'Victory' : 'Defeat'
