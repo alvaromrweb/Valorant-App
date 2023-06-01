@@ -16,7 +16,7 @@ export default function Profile() {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row justify-center w-full mt-16 md:mt-20 gap-5">
+      <div className="flex flex-col md:flex-row justify-center w-full mt-16 gap-5">
           {loading ? 
           <ProfileSkeleton /> : (
 
