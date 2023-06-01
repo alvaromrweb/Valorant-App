@@ -13,10 +13,10 @@ export default function Header() {
             name: 'Home',
             link: '/'
         },
-        // {
-        //     name: 'Leaderboard',
-        //     link: '/leaderboard'
-        // },
+        {
+            name: 'Leaderboard',
+            link: '/leaderboard'
+        },
     ]
 
     return (
@@ -25,7 +25,7 @@ export default function Header() {
                 <div className="basis-2/12 flex items-center">
                     <NavLink to="/">
                         <h2 className='text-4xl font-bold'>
-                            GG<span className="text-[#ff4357]">.</span>EZ
+                            GG<span className="text-redV">.</span>EZ
                         </h2>
                     </NavLink>
                 </div>
@@ -37,9 +37,9 @@ export default function Header() {
                                 <NavLink
                                     to={navLink.link}
                                     className={({ isActive }) =>
-                                        `pb-[11px] font-bold text-slate-400 text-xl hover:text-white ${isActive && 'text-white  border-b-4 border-[#ff4357]'}`
+                                        `pb-[11px] font-bold text-slate-400 text-xl hover:text-white ${isActive && 'text-white  border-b-4 border-redV'}`
                                     }
-                                    onClick={() => navLink.name === 'Home' && resetProfile() }
+                                    onClick={() => resetProfile() }
                                 >
                                     {navLink.name}
                                 </NavLink>
@@ -51,14 +51,14 @@ export default function Header() {
                 <nav className="flex md:hidden">
                     <button 
                         type="button" 
-                        class="inline-flex items-center  text-sm rounded-lg text-white "
+                        className="inline-flex items-center  text-sm rounded-lg text-white "
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                     >
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="w-8 h-8" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                        <span className="sr-only">Open main menu</span>
+                        <svg className="w-8 h-8" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd"></path></svg>
                     </button>
-                    <div class={`${isMenuOpen ? 'absolute' : 'hidden'} w-full h-screen left-0 top-0 bg-slate-900`}>
-                        <ul class="flex flex-col gap-5 px-3 py-2 text-center">
+                    <div className={`${isMenuOpen ? 'absolute' : 'hidden'} w-full h-screen left-0 top-0 bg-slate-900`}>
+                        <ul className="flex flex-col gap-5 px-3 py-2 text-center">
                             <li className="text-right">
                                 <button 
                                     className="text-slate-400 text-2xl font-bold mr-4"
