@@ -9,7 +9,7 @@ export default function Leaderboard() {
   return (
     <div className="flex flex-col md:flex-row justify-center w-full mt-10 md:mt-16 gap-5">
       <main className="max-w-5xl w-full bg-slate-900/90 py-5 px-4 rounded">
-        
+
         <div className='flex justify-start gap-5 mb-4'>
           <select 
             value={region} 
@@ -17,7 +17,7 @@ export default function Leaderboard() {
             className='bg-slate-800 border border-gray-700 text-white rounded px-4 py-2 outline-none'
           >
             {regions.map(region => (
-              <option value={region.value}>{region.name}</option>
+              <option key={region.value} value={region.value}>{region.name}</option>
             ))}
           </select>
         </div>
