@@ -14,7 +14,6 @@ export default function useLeaderboard () {
                 const limitedPlayers = response.data.players.slice(0, 99)
                 let limitedLeaderboard = response.data
                 limitedLeaderboard.players = limitedPlayers
-                console.log(limitedLeaderboard)
                 setLeaderboard(limitedLeaderboard)
             } else {
                 setError(response.error[0].message)
