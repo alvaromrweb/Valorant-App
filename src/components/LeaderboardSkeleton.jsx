@@ -4,7 +4,7 @@ import LeaderboardPlayerSkeleton from './LeaderboardPlayerSkeleton';
 export default function LeaderboardSkeleton() {
   const skeletonPlayers = Array(99).fill(0);
   return (
-      <div className="flex flex-col bg-slate-900/90 py-5 px-4 rounded text-left gap-0.5 ">
+      <div className="flex flex-col text-left gap-0.5 ">
         <header className='bg-gray-500/10'>
             <div className='flex flex-wrap justify-between gap-2 md:gap-5 py-3 px-3 items-center animate-pulse text-slate-400 rounded-t text-xs md:text-base'>
                 <div className='basis-8 md:basis-10 text-center'>
