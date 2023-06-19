@@ -103,3 +103,11 @@ export const isValidNameTag = nametag => {
     const found = nametag.match(regExp)
     return !found || found[0] !== nametag ? false : true
 }
+
+export const range = (start, end) => {
+    var ans = [];
+    for (let i = start; i <= end; i++) {
+        ans.push(i);
+    }
+    return ans;
+}
