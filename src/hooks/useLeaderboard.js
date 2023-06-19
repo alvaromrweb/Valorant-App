@@ -11,10 +11,7 @@ export default function useLeaderboard () {
         setLoading(true)
         getLeaderboard(region).then(response => {
             if(response.status === 200) {
-                const limitedPlayers = response.data.players.slice(0, 99)
-                let limitedLeaderboard = response.data
-                limitedLeaderboard.players = limitedPlayers
-                setLeaderboard(limitedLeaderboard)
+                setLeaderboard(response.data)
             } else {
                 setError(response.error[0].message)
             }
