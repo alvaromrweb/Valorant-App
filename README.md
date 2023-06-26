@@ -7,6 +7,6 @@ TODO LIST:
 - Store recent searches in localstorage and show them when focusing the search input :white_check_mark:
 - Add header with search input :white_check_mark:
 - Add leaderboard :white_check_mark:
-- Make leaderboard able to change region and paginate or infinite scroll
-- Make infinite scroll load of matches
+- Make leaderboard able to change region and paginate :white_check_mark:
+- Make infinite scroll load of matches :x: (not possible due to the API endpoints)
 - Store data fetch in database, and only fetch when the data is not in the database or needs refresh
