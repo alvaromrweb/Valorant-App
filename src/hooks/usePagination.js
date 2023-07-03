@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react"
 import { range } from "../helpers"
 
-export default function usePagination ({currentPageProp = 1, pageSizeProp = 20, totalCount, items, siblingCount = 1}) {
+export default function usePagination ({currentPageProp = 1, pageSizeProp = 20, items, siblingCount = 1}) {
     const [currentPage, setCurrentPage] = useState(currentPageProp)
     const [pageSize, setPageSize] = useState(pageSizeProp)
     const [currentListData, setCurrentListData] = useState([])
@@ -13,6 +13,7 @@ export default function usePagination ({currentPageProp = 1, pageSizeProp = 20, 
             const lastIndex = pageSize * currentPage
             setCurrentListData(items.slice(firstIndex, lastIndex))
 
+            const totalCount = items.length
             const totalPageCount = Math.ceil(totalCount / pageSize)
             const shouldShowLeftDots = currentPage - (siblingCount * 2) > 0 
             const shouldShowRightDots = (totalPageCount - currentPage) > (siblingCount * 2)
@@ -41,7 +42,9 @@ export default function usePagination ({currentPageProp = 1, pageSizeProp = 20, 
                 const rightRange = range(currentPage + 1, rightSiblingIndex)
                 pagElemArray = [...pagElemArray, ...rightRange] 
             }
-            pagElemArray.push(totalPageCount)
+            if(totalPageCount > 1) {
+                pagElemArray.push(totalPageCount)
+            }
             setPaginationElements(pagElemArray)
         }
       }, [items, currentPage, pageSize])
