@@ -79,7 +79,7 @@ export const getPlayerCardImgById = (cardId, size = 'small') => {
 }
 
 export const getMapImgByName = map => {
-    return `${import.meta.env.VITE_MAPS_IMG_API}/Maps/${map}.png`
+    return `${import.meta.env.VITE_MAPS_IMG_API}/${map.toLowerCase()}.jpg`
 }
 
 export const getElapsedTime = (start, end) => {

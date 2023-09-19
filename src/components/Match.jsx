@@ -14,6 +14,8 @@ export default function Match({match}) {
         matchDetails.classList.toggle("hidden");
     }
 
+    console.log(match)
+
     return  (
         <>
         <article 
