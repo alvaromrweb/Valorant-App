@@ -44,7 +44,7 @@ export default function Match({match}) {
                         <span className="text-white font-bold">{match.playerSelected.stats.assists}</span> 
                     </div>
                 </div>
-                <div className="flex relative text-center z-20 basis-1/4 md:basis-auto 2xl:basis-20 my-auto">
+                <div className="flex relative text-center z-10 basis-1/4 md:basis-auto 2xl:basis-20 my-auto">
                     <PlayerPosition playerPosition={match.playerSelected.matchPosition} />
                 </div>
                 <div className="flex flex-col relative 2xl:px-5 text-center z-10 basis-1/4 md:basis-20 2xl:basis-32 py-3 " >
